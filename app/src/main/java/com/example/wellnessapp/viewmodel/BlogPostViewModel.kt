@@ -12,6 +12,7 @@ import com.example.wellnessapp.repository.BlogPostRepository
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -84,14 +85,17 @@ class BlogPostViewModel @Inject constructor(
 
     // Function to upload the image to Firebase Storage and return the download URL
     private suspend fun uploadImage(imageUri: Uri?): String? {
+        Log.d("UploadImage", "Image URI: $imageUri")
         return if (imageUri != null) {
             try {
-                val storageRef = Firebase.storage.reference// Get a reference to Firebase Storage
+                val storage = FirebaseStorage.getInstance()
+                val storageRef = storage.reference
                 val imageRef = storageRef.child("blogImages/${System.currentTimeMillis()}.jpg") // Unique path for each image
                 val uploadTask = imageRef.putFile(imageUri).await() // Upload the image
                 imageRef.downloadUrl.await().toString() // Get and return the download URL
             } catch (e: Exception) {
                 e.printStackTrace()
+                Log.e("UploadImage", "Error uploading image", e)
                 null // Return null if there's an error
             }
         } else {

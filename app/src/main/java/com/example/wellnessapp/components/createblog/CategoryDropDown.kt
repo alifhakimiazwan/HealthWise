@@ -30,9 +30,11 @@ fun CategoryDropDown(
     onCategorySelected: (String) -> Unit
 ) {
     val categories = listOf(
-        "Diet",
+        "Diets",
         "Fitness",
-        "Lifestyle"
+        "Lifestyle",
+        "Entertainment",
+        "Skin Care",
     )
     var expanded by remember { mutableStateOf(false) }
 

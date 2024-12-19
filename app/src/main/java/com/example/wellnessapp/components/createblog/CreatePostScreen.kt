@@ -4,13 +4,17 @@ import android.net.Uri
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -19,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberAsyncImagePainter
 import com.example.wellnessapp.R
 import com.example.wellnessapp.action.formatTimestampToDate
 import com.example.wellnessapp.components.home.WellnessBottomAppBar
@@ -32,15 +37,12 @@ fun CreatePostScreen(navController: NavController, blogPostViewModel: BlogPostVi
     var subheading by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var imageUri by remember { mutableStateOf<Uri?>(null) }
-//    var authorName by remember { mutableStateOf("") }
     val authorName = "Alif Hakimi"
-    // Collect the current user details (e.g., username or authorName) from a ViewModel or a stored value
 
+    // Image Picker Launcher
     val imagePickerLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let {
-                imageUri = it
-            }
+            uri?.let { imageUri = it }
         }
 
     // Collect the StateFlow with collectAsState
@@ -76,6 +78,7 @@ fun CreatePostScreen(navController: NavController, blogPostViewModel: BlogPostVi
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
+                    .verticalScroll(rememberScrollState()) // Make the column scrollable
                     .background(Color.White)
             ) {
                 Spacer(modifier = Modifier.height(16.dp))
@@ -147,25 +150,6 @@ fun CreatePostScreen(navController: NavController, blogPostViewModel: BlogPostVi
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-                // AuthorName Field
-//                OutlinedTextField(
-//                    shape = RoundedCornerShape(16.dp),
-//                    value = authorName,
-//                    onValueChange = { authorName = it },
-//                    label = { Text("Author Name") },
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .height(300.dp)
-//                        .background(Color.White),
-//                    maxLines = 20,
-//                    minLines = 2,
-//                    singleLine = false,
-//                    colors = TextFieldDefaults.outlinedTextFieldColors(
-//                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-//                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-//                        containerColor = Color.White
-//                    )
-//                )
 
                 // Image Selection
                 Row(
@@ -192,6 +176,22 @@ fun CreatePostScreen(navController: NavController, blogPostViewModel: BlogPostVi
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Display selected image
+                imageUri?.let {
+                    Image(
+                        painter = rememberAsyncImagePainter(it),
+                        contentDescription = "Selected Image",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .padding(top = 16.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // Post Button
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -237,7 +237,7 @@ fun CreatePostScreen(navController: NavController, blogPostViewModel: BlogPostVi
 @Composable
 fun PreviewCreateScreen() {
     val navController = rememberNavController()
-    WellnessappTheme (darkTheme = false) {
+    WellnessappTheme(darkTheme = false) {
         CreatePostScreen(navController = navController)
     }
 }
