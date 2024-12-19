@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">wellnessapp</string>
+    <string name="blog_post_title_1">Building Muscle: The Essential Guide</string>
+    <string name="blog_post_subheading_1">Everything you need to know to get started with weight training.</string>
+
+    <string name="blog_post_title_2">Nutrition for Fitness</string>
+    <string name="blog_post_subheading_2">How to fuel your body for optimal performance.</string>
+
+    <string name="blog_post_title_3">Cardio Workouts Explained</string>
+    <string name="blog_post_subheading_3">Understanding the benefits of cardio for overall health.</string>
+
+    <string name="blog_post_title_4">Yoga for Strength</string>
+    <string name="blog_post_subheading_4">Incorporating yoga into your fitness routine.</string>
+
+    <string name="blog_post_title_5">The Importance of Recovery</string>
+    <string name="blog_post_subheading_5">How rest and recovery can boost your fitness progress.</string>
+</resources>

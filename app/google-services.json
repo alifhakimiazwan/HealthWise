@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "210934006276",
+    "project_id": "healthwise-40e2d",
+    "storage_bucket": "healthwise-40e2d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210934006276:android:d661a839ed05cfcad8ab51",
+        "android_client_info": {
+          "package_name": "com.example.wellnessapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0IOILzInNR6lEtarVrR0jqhuuQqw0LC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

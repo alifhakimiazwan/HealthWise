@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="padding_extrasmall">3dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="image_small_size">32dp</dimen>
+    <dimen name="image_size">48dp</dimen>
+</resources>
